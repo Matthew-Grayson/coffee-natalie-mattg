@@ -23,7 +23,7 @@ function updateCoffees(e) {
     var searchedCoffee = new RegExp(coffeeSearch.value, "i");
     var filteredCoffees = [];
     coffees.forEach(function(coffee) {
-        if (searchedCoffee.test(coffee.name) && coffee.roast === selectedRoast || selectedRoast === "all") {
+        if (searchedCoffee.test(coffee.name) && (coffee.roast === selectedRoast || selectedRoast === "all")) {
             filteredCoffees.push(coffee);
         }
 });

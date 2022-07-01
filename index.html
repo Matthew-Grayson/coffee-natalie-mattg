@@ -22,40 +22,41 @@
                     <div id="coffees" class="row"></div>
                 </div>
                 <div class="col-6">
+                    <h2 class="mb-0">Search for a Coffee!</h2>
                     <form>
-                        <label for="roast-selection"><h5>Roast</h5></label>
+                        <label for="roast-selection">Roast</label>
                         <select id="roast-selection" class="form-select" aria-label="Select Roast">
                             <option >all</option>
                             <option>light</option>
                             <option>medium</option>
                             <option>dark</option>
                         </select>
-                        <div class="mb-3">
-                            <label for="coffee-search" class="form-label"><h5>Coffee Name</h5></label>
+                        <div class="mb-2">
+                            <label for="coffee-search">Coffee Name</label>
                             <input type="text" class="form-control" id="coffee-search">
                         </div>
                         <div class="d-grid gap-2">
-                            <button style="font-size: 1.5rem" class="btn btn-secondary" type="button" disabled>
-                                <span class="spinner-grow spinner-grow" role="status" aria-hidden="true"></span>
-                                <span class="visually-hidden">Loading...</span>
+                            <button style="font-size: 1rem" class="btn btn-secondary" type="button" disabled>
+
+                                <span style="font-size: 1rem">...</span>
                             </button>
                         </div>
                     </form>
-                    <h2>Add a Coffee!</h2>
+                    <h2 class="mb-0">Add a Coffee!</h2>
                     <form>
-                        <label for="roast-add"><h5>Roast</h5></label>
+                        <label for="roast-add">Roast</label>
                         <select id="roast-add" class="form-select" aria-label="Select Roast">
                             <option>light</option>
                             <option>medium</option>
                             <option>dark</option>
                         </select>
-                        <div class="mb-3">
-                            <label for="coffee-add" class="form-label"><h5>Name</h5></label>
+                        <div class="mb-2">
+                            <label for="coffee-add">Name</label>
                             <input type="text" class="form-control" id="coffee-add">
                         </div>
 <!--                        <input id="submit" type="submit">-->
                         <div id="submit" class="d-grid gap-2">
-                            <button style="font-size: 1.5rem" class="btn btn-secondary" type="button">Add Coffee</button>
+                            <button style="font-size: 1rem" class="btn btn-secondary" type="button">Add Coffee</button>
                         </div>
                     </form>
                 </div>

@@ -16,7 +16,6 @@ body {
     font-size: 2rem;
     font-weight: bold;
 }
-
 .roastText {
     font-size: 1.5rem;
     color: #666;
@@ -29,7 +28,10 @@ body {
 #heading {
     color: white;
     margin-bottom: 2rem;
-}
+    text-shadow: 5px 5px #666}
 .row {
     margin: 0;
+}
+label {
+    text-shadow: 1px 1px #FFF;
 }

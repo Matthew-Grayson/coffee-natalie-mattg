@@ -12,8 +12,8 @@
 
     <form>
         <label for="roast-selection"><h5>Roast</h5></label>
-        <select id="roast-selection" class="form-select" aria-label="Default select example">
-            <option>all</option>
+        <select id="roast-selection" class="form-select" aria-label="Select Roast">
+            <option >all</option>
             <option>light</option>
             <option>medium</option>
             <option>dark</option>
@@ -22,9 +22,22 @@
             <label for="coffee-search" class="form-label"><h5>Coffee Name</h5></label>
             <input type="text" class="form-control" id="coffee-search">
         </div>
-        <input id="submit" type="submit" />
     </form>
 
+    <h2>Add a Coffee!</h2>
+    <form>
+        <label for="roast-add"><h5>Roast</h5></label>
+        <select id="roast-add" class="form-select" aria-label="Select Roast">
+            <option>light</option>
+            <option>medium</option>
+            <option>dark</option>
+        </select>
+        <div class="mb-3">
+            <label for="coffee-add" class="form-label"><h5>Name</h5></label>
+            <input type="text" class="form-control" id="coffee-add">
+        </div>
+        <input id="submit" type="submit" >
+    </form>
     <table>
         <tbody id="coffees"></tbody>
     </table>

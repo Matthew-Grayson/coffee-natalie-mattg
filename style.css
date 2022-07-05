@@ -1,16 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Abel&family=Anton&display=swap');
+/* The typing effect */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 40% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: transparent }
+
+}
 root {
     font-family: 'Anton', sans-serif;
 }
-body {
-    background-image: url("/BurlapCoffee2.jpg");
-    background-repeat: no-repeat;
+#header {
+    color: white;
+    text-shadow: 5px 5px #666;
+    background-image: url("coffeetop.png");
+    background-position: bottom;
     background-size: 100%;
-    background-attachment: fixed;
-    background-position: center;
+    background-color: #E6DDCC;
 }
-.container{
-    min-width: 90%;
+h1 {
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    white-space: nowrap; /* Keeps the content on a single line */
+    animation:
+            typing 3.5s steps(30, end);
+}
+#footer {
+    background-image: url("coffeebottom.png");
+    background-size: 100%;
+    background-color: #E6DDCC;
+    padding-top: 0;
+}
+#main {
+    background-color: #E6DDCC;
+    padding-bottom: 10rem;
+}
+body {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+}
+.container {
+    min-width: 100%;
 }
 .nameText {
     font-size: 2rem;
@@ -20,18 +54,12 @@ body {
     font-size: 1.5rem;
     color: #666;
     text-shadow: 1px 1px #FFF;
-
  }
 .btn {
     font-size: 3rem;
 }
-#heading {
-    color: white;
-    margin-bottom: 2rem;
-    text-shadow: 5px 5px #666}
 .row {
     margin: 0;
 }
 label {
     text-shadow: 1px 1px #FFF;
-}

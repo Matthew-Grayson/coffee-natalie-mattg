@@ -39,9 +39,20 @@ function addCoffee(e) {
         alert("That coffee already exists.")
     }
     else {
-        coffees.push({id: newId, name: newName, roast: newRoast});
-        localStorage.setItem(newId, `${coffeeAdd.value},${roastAdd.value}`)
+        switch(roastAdd.value) {
+            case "light":
+                coffees.push({id: newId, name: newName, roast: newRoast, roastId: '1'});
+                localStorage.setItem(newId, `${coffeeAdd.value},${roastAdd.value},1`)
+                break;
+            case "medium":
+                coffees.push({id: newId, name: newName, roast: newRoast, roastId: '2'});
+                localStorage.setItem(newId, `${coffeeAdd.value},${roastAdd.value},2`)
+            case "dark":
+                coffees.push({id: newId, name: newName, roast: newRoast, roastId: '3'});
+                localStorage.setItem(newId, `${coffeeAdd.value},${roastAdd.value},3`)
+        }
     }
+    sortByNameAndThenRoast();
 }
 function loadingAnimation(e) {
     e.preventDefault();
@@ -71,28 +82,35 @@ function loadingAnimation(e) {
 
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
 var coffees = [
-    {id: 1, name: 'Light City', roast: 'light'},
-    {id: 2, name: 'Half City', roast: 'light'},
-    {id: 3, name: 'Cinnamon', roast: 'light'},
-    {id: 4, name: 'City', roast: 'medium'},
-    {id: 5, name: 'American', roast: 'medium'},
-    {id: 6, name: 'Breakfast', roast: 'medium'},
-    {id: 7, name: 'High', roast: 'dark'},
-    {id: 8, name: 'Continental', roast: 'dark'},
-    {id: 9, name: 'New Orleans', roast: 'dark'},
-    {id: 10, name: 'European', roast: 'dark'},
-    {id: 11, name: 'Espresso', roast: 'dark'},
-    {id: 12, name: 'Viennese', roast: 'dark'},
-    {id: 13, name: 'Italian', roast: 'dark'},
-    {id: 14, name: 'French', roast: 'dark'},
+    {id: 1, name: 'Light City', roast: 'light', roastId: '1'},
+    {id: 2, name: 'Half City', roast: 'light', roastId: '1'},
+    {id: 3, name: 'Cinnamon', roast: 'light', roastId: '1'},
+    {id: 4, name: 'City', roast: 'medium', roastId: '2'},
+    {id: 5, name: 'American', roast: 'medium', roastId: '2'},
+    {id: 6, name: 'Breakfast', roast: 'medium', roastId: '2'},
+    {id: 7, name: 'High', roast: 'dark', roastId: '3'},
+    {id: 8, name: 'Continental', roast: 'dark', roastId: '3'},
+    {id: 9, name: 'New Orleans', roast: 'dark', roastId: '3'},
+    {id: 10, name: 'European', roast: 'dark', roastId: '3'},
+    {id: 11, name: 'Espresso', roast: 'dark', roastId: '3'},
+    {id: 12, name: 'Viennese', roast: 'dark', roastId: '3'},
+    {id: 13, name: 'Italian', roast: 'dark', roastId: '3'},
+    {id: 14, name: 'French', roast: 'dark', roastId: '3'},
 ];
+
+function sortByNameAndThenRoast() {
+    coffees = coffees.sort((a,b) => a.name.localeCompare(b.name))
+    coffees = coffees.sort((a,b) => a.roastId - b.roastId)
+}
+
 function appendFromLocalStorage() {
     for (let i = 0; i < localStorage.length; i++) {
         let newId = coffees.length + 1;
-        coffees.push({id: newId, name: localStorage[newId].split(",")[0], roast: localStorage[newId].split(",")[1]})
+        coffees.push({id: newId, name: localStorage[newId].split(",")[0], roast: localStorage[newId].split(",")[1], roastId: localStorage[newId].split(",")[2]})
     }
 }
-appendFromLocalStorage()
+appendFromLocalStorage();
+sortByNameAndThenRoast();
 
 var tbody = document.querySelector('#coffees');
 var submitButton = document.querySelector('#submit');

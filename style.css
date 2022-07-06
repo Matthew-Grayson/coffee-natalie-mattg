@@ -44,7 +44,7 @@ body {
     justify-content: center;
     background-image: url("sky.gif");
     background-attachment: fixed;
-    background-size: 200vh;
+    background-size: 300vh;
     background-repeat: no-repeat;
     background-position: top right;
 }

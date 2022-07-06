@@ -21,8 +21,8 @@ function renderCoffees(coffees) {
     }
     return html;
 }
-function updateCoffees(e) {
-    e.preventDefault(); // don't submit the form, we just want to update the data
+function updateCoffees() {
+    // e.preventDefault(); // don't submit the form, we just want to update the data
     var selectedRoast = roastSelection.value;
     var searchedCoffee = new RegExp(coffeeSearch.value, "i");
     var filteredCoffees = [];
@@ -32,6 +32,11 @@ function updateCoffees(e) {
         }
     });
     tbody.innerHTML = renderCoffees(filteredCoffees);
+    textNames = document.querySelectorAll('.nameText');
+    textNames.forEach(function(name) {
+        name.addEventListener('click', removeCoffee);
+    })
+
 }
 function addCoffee(e) {
     e.preventDefault();
@@ -64,10 +69,19 @@ function addCoffee(e) {
     sortByNameAndThenRoast();
 }
 
-// function removeCoffee() {
-//     localStorage.removeItem()
-//
-// }
+
+function removeCoffee() {
+    console.log(this.firstChild.textContent);
+    let coffeeArray = [];
+    coffees.forEach(function(coffee) {
+        coffeeArray.push(coffee.name);
+    })
+    let coffeeToDelete = coffeeArray.indexOf(this.firstChild.textContent);
+    localStorage.removeItem(coffees[coffeeToDelete].id);
+    coffees.splice(coffeeToDelete, 1);
+    updateCoffees();
+}
+
 function loadingAnimation(e) {
     e.preventDefault();
     for (let i = 1; i <= 6; i++) {
@@ -134,6 +148,11 @@ var coffeeAdd = document.querySelector('#coffee-add');
 var roastAdd = document.querySelector('#roast-add');
 
 tbody.innerHTML = renderCoffees(coffees);
+
+var textNames = document.querySelectorAll('.nameText');
+textNames.forEach(function(name) {
+    name.addEventListener('click', removeCoffee);
+})
 
 submitButton.addEventListener('click', addCoffee);
 submitButton.addEventListener('click', updateCoffees);

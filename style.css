@@ -15,12 +15,12 @@ root {
     font-family: 'Anton', sans-serif;
 }
 #header {
-    color: white;
-    text-shadow: 5px 5px #666;
-    background-image: url("coffeetop.png");
-    background-position: bottom;
-    background-size: 100%;
-    background-color: #E6DDCC;
+    color: black;
+    text-shadow: 3px 3px #666;
+    /*!*background-image: url("coffeetop.png");*!*/
+    /*background-position: bottom;*/
+    /*background-size: 100%;*/
+    /*background-color: #E6DDCC;*/
 }
 h1 {
     overflow: hidden; /* Ensures the content is not revealed until the animation */
@@ -29,19 +29,24 @@ h1 {
             typing 3.5s steps(30, end);
 }
 #footer {
-    background-image: url("coffeebottom.png");
-    background-size: 100%;
-    background-color: #E6DDCC;
+    /*background-image: url("coffeebottomb.png");*/
+    /*background-size: 100%;*/
+    /*background-color: #E6DDCC;*/
     padding-top: 0;
 }
 #main {
-    background-color: #E6DDCC;
+    /*background-color: #E6DDCC;*/
     padding-bottom: 10rem;
 }
 body {
     min-height: 100%;
     display: flex;
     justify-content: center;
+    background-image: url("sky.gif");
+    background-attachment: fixed;
+    background-size: 200vh;
+    background-repeat: no-repeat;
+    background-position: top right;
 }
 .container {
     min-width: 100%;
@@ -55,9 +60,9 @@ body {
     color: #666;
     text-shadow: 1px 1px #FFF;
  }
-.btn {
-    font-size: 3rem;
-}
+/*.btn {*/
+/*    background-color: darkblue;*/
+/*}*/
 .row {
     margin: 0;
 }

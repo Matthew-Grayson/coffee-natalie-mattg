@@ -7,6 +7,13 @@ function renderCoffee(coffee) {
     html += '</div>';
     return html;
 }
+//
+// <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+//     <li><a className="dropdown-item" href="#">Action</a></li>
+//     <li><a className="dropdown-item" href="#">Another action</a></li>
+//     <li><a className="dropdown-item" href="#">Something else here</a></li>
+// </ul>
+
 function renderCoffees(coffees) {
     var html = '';
     for(var i = 0; i <= coffees.length - 1; i++) {
@@ -47,13 +54,20 @@ function addCoffee(e) {
             case "medium":
                 coffees.push({id: newId, name: newName, roast: newRoast, roastId: '2'});
                 localStorage.setItem(newId, `${coffeeAdd.value},${roastAdd.value},2`)
+                break;
             case "dark":
                 coffees.push({id: newId, name: newName, roast: newRoast, roastId: '3'});
                 localStorage.setItem(newId, `${coffeeAdd.value},${roastAdd.value},3`)
+                break;
         }
     }
     sortByNameAndThenRoast();
 }
+
+// function removeCoffee() {
+//     localStorage.removeItem()
+//
+// }
 function loadingAnimation(e) {
     e.preventDefault();
     for (let i = 1; i <= 6; i++) {

@@ -2,17 +2,27 @@
 
 function renderCoffee(coffee) {
     var html = '<div class="col-3 coffee">';
-    html += '<div class="nameText">' + coffee.name;
+    html += '<div class="nameText" data-bs-toggle="modal" data-bs-target="#' + coffee.name.replace(/ /g,'') + 'Modal">' + coffee.name;
     html += '<p class="roastText">' + coffee.roast + '</p></div>';
+    html += '<div class="modal fade" id="' + coffee.name.replace(/ /g,'') + 'Modal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">'
+    html += '<div class="modal-dialog">'
+    html += '<div class="modal-content">'
+    html += '<div class="modal-header">'
+    html += '<h5 class="modal-title" id="' + coffee.name.replace(/ /g,'') + 'ModalLabel">' + coffee.name + '</h5>'
+    html += '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>'
+    html += '</div>'
+    html += '<div class="modal-body">'
+    html += 'Would you like to delete this coffee?'
+    html += '</div>'
+    html += '<div class="modal-footer">'
+    html += '<button id="' + coffee.id + '" type="button" class="btn btn-primary deleteButton">Delete</button>'
+    html += '</div>'
+    html += '</div>'
+    html += '</div>'
+    html += '</div>'
     html += '</div>';
     return html;
 }
-//
-// <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-//     <li><a className="dropdown-item" href="#">Action</a></li>
-//     <li><a className="dropdown-item" href="#">Another action</a></li>
-//     <li><a className="dropdown-item" href="#">Something else here</a></li>
-// </ul>
 
 function renderCoffees(coffees) {
     var html = '';
@@ -36,7 +46,6 @@ function updateCoffees() {
     textNames.forEach(function(name) {
         name.addEventListener('click', removeCoffee);
     })
-
 }
 function addCoffee(e) {
     e.preventDefault();
@@ -67,46 +76,67 @@ function addCoffee(e) {
         }
     }
     sortByNameAndThenRoast();
-}
-
-
-function removeCoffee() {
-    console.log(this.firstChild.textContent);
-    let coffeeArray = [];
-    coffees.forEach(function(coffee) {
-        coffeeArray.push(coffee.name);
-    })
-    let coffeeToDelete = coffeeArray.indexOf(this.firstChild.textContent);
-    localStorage.removeItem(coffees[coffeeToDelete].id);
-    coffees.splice(coffeeToDelete, 1);
     updateCoffees();
 }
+function removeCoffee () {
+    let idArray = [];
+    coffees.forEach(function(id){
+        idArray.push(coffees.id)
+    })
+    console.log(idArray)
+    let coffeeToDelete = idArray.indexOf(coffees.id);
+    coffees.splice(coffeeToDelete, 1);
+    updateCoffees();
 
-function loadingAnimation(e) {
-    e.preventDefault();
-    for (let i = 1; i <= 6; i++) {
-        switch (document.getElementById(i).style.color) {
-            case "red":
-                document.getElementById(i).style.color = "orange"
-                break;
-            case "orange":
-                document.getElementById(i).style.color = "yellow"
-                break;
-            case "yellow":
-                document.getElementById(i).style.color = "green"
-                break;
-            case "green":
-                document.getElementById(i).style.color = "blue"
-                break;
-            case "blue":
-                document.getElementById(i).style.color = "indigo"
-                break;
-            case "indigo":
-                document.getElementById(i).style.color = "red"
-                break;
-        }
-    }
+
 }
+// function identifyCoffeeToDelete () {
+//     console.log(this.firstChild.textContent);;
+// }
+// let identifyCoffeeToDelete = function() {
+//     return this.firstChild.textContent;
+// }
+
+// function removeCoffee() {
+//     var thisOne = this.firstChild.textContent;
+//     console.log(thisOne);
+//     let coffeeArray = [];
+//     coffees.forEach(function(coffee) {
+//         coffeeArray.push(coffee.name);
+//     })
+//     let coffeeToDelete = coffeeArray.indexOf(thisOne);
+//     localStorage.removeItem(coffees[coffeeToDelete].id);
+//     coffees.splice(coffeeToDelete, 1);
+//     updateCoffees();
+// }
+
+
+
+// function loadingAnimation(e) {
+//     e.preventDefault();
+//     for (let i = 1; i <= 6; i++) {
+//         switch (document.getElementById(i).style.color) {
+//             case "red":
+//                 document.getElementById(i).style.color = "orange"
+//                 break;
+//             case "orange":
+//                 document.getElementById(i).style.color = "yellow"
+//                 break;
+//             case "yellow":
+//                 document.getElementById(i).style.color = "green"
+//                 break;
+//             case "green":
+//                 document.getElementById(i).style.color = "blue"
+//                 break;
+//             case "blue":
+//                 document.getElementById(i).style.color = "indigo"
+//                 break;
+//             case "indigo":
+//                 document.getElementById(i).style.color = "red"
+//                 break;
+//         }
+//     }
+// }
 
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
 var coffees = [
@@ -149,7 +179,7 @@ var roastAdd = document.querySelector('#roast-add');
 
 tbody.innerHTML = renderCoffees(coffees);
 
-var textNames = document.querySelectorAll('.nameText');
+var textNames = document.querySelectorAll('.deleteButton');
 textNames.forEach(function(name) {
     name.addEventListener('click', removeCoffee);
 })
@@ -157,6 +187,6 @@ textNames.forEach(function(name) {
 submitButton.addEventListener('click', addCoffee);
 submitButton.addEventListener('click', updateCoffees);
 roastSelection.addEventListener('change', updateCoffees);
-roastSelection.addEventListener('change', loadingAnimation);
+// roastSelection.addEventListener('change', loadingAnimation);
 coffeeSearch.addEventListener('keyup', updateCoffees);
-coffeeSearch.addEventListener('keyup', loadingAnimation);
+// coffeeSearch.addEventListener('keyup', loadingAnimation);

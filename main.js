@@ -1,26 +1,29 @@
 "use strict"
-
 function renderCoffee(coffee) {
-    var html = '<div class="col-3 coffee">';
-    html += '<div class="nameText" data-bs-toggle="modal" data-bs-target="#' + coffee.name.replace(/ /g,'') + 'Modal">' + coffee.name;
-    html += '<p class="roastText">' + coffee.roast + '</p></div>';
-    html += '<div class="modal fade" id="' + coffee.name.replace(/ /g,'') + 'Modal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">'
-    html += '<div class="modal-dialog">'
-    html += '<div class="modal-content">'
-    html += '<div class="modal-header">'
-    html += '<h5 class="modal-title" id="' + coffee.name.replace(/ /g,'') + 'ModalLabel">' + coffee.name + '</h5>'
-    html += '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>'
-    html += '</div>'
-    html += '<div class="modal-body">'
-    html += 'Would you like to delete this coffee?'
-    html += '</div>'
-    html += '<div class="modal-footer">'
-    html += '<button id="' + coffee.id + '" type="button" class="btn btn-primary deleteButton">Delete</button>'
-    html += '</div>'
-    html += '</div>'
-    html += '</div>'
-    html += '</div>'
-    html += '</div>';
+    var html = `
+<div class="col-3 coffee">
+    <div class="nameText" data-bs-toggle="modal" data-bs-target="#${coffee.name.toLowerCase().replace(/\W/g,"-")}-modal">
+        <span>${coffee.name}</span>
+        <p class="roastText">${coffee.roast}</p>
+    </div>
+    <div class="modal fade" id="${coffee.name.toLowerCase().replace(/\W/g,"-")}-modal" tabIndex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="${coffee.name.toLowerCase().replace(/\W/g,"-")}-modal-label">${coffee.name}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Would you like to delete this coffee?</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="${coffee.id}" type="button" class="btn btn-primary deleteButton">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    `
     return html;
 }
 
@@ -42,8 +45,12 @@ function updateCoffees() {
         }
     });
     tbody.innerHTML = renderCoffees(filteredCoffees);
-    textNames = document.querySelectorAll('.nameText');
-    textNames.forEach(function(name) {
+    // let textNames = document.querySelectorAll('.nameText');
+    // textNames.forEach(function(name) {
+    //     name.addEventListener('click', removeCoffee);
+    // })
+    var deleteButton = document.querySelectorAll('.deleteButton');
+    deleteButton.forEach(function(name) {
         name.addEventListener('click', removeCoffee);
     })
 }
@@ -80,12 +87,16 @@ function addCoffee(e) {
 }
 function removeCoffee () {
     let idArray = [];
-    coffees.forEach(function(id){
-        idArray.push(coffees.id)
-    })
-    console.log(idArray)
-    let coffeeToDelete = idArray.indexOf(coffees.id);
+    let idToDelete = Number(this.id); //convert to number (typeof this.id = "string")
+    for(let i = 0; i < coffees.length; i++) {
+        idArray.push(coffees[i].id)
+    }
+    let coffeeToDelete = idArray.indexOf(idToDelete); //indexOf only works numbers of type "number"
+    console.log(coffeeToDelete);
+    console.log(typeof coffeeToDelete);
     coffees.splice(coffeeToDelete, 1);
+    let backdrop = document.querySelector(".modal-backdrop");
+    backdrop.remove();
     updateCoffees();
 
 
@@ -179,8 +190,8 @@ var roastAdd = document.querySelector('#roast-add');
 
 tbody.innerHTML = renderCoffees(coffees);
 
-var textNames = document.querySelectorAll('.deleteButton');
-textNames.forEach(function(name) {
+var deleteButton = document.querySelectorAll('.deleteButton');
+deleteButton.forEach(function(name) {
     name.addEventListener('click', removeCoffee);
 })
 

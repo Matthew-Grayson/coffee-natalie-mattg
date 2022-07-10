@@ -56,10 +56,10 @@ function updateCoffees() {
 }
 function addCoffee(e) {
     e.preventDefault();
-    var newId = coffees.length+1;
     var newName = coffeeAdd.value;
     var newRoast = roastAdd.value;
     var existingNames = [];
+    var newId = coffees.length - localStorage.length + 1;
     for(let i = 0; i < coffees.length; i++) {
         existingNames.push(coffees[i].name)
     }
@@ -67,17 +67,22 @@ function addCoffee(e) {
         alert("That coffee already exists.")
     }
     else {
+        while(JSON.stringify(localStorage).includes(newId)) { //prevents overwriting of existing ids
+            console.log(newId);
+            newId++;
+            console.log(newId);
+        }
         switch(roastAdd.value) {
             case "light":
-                coffees.push({id: newId, name: newName, roast: newRoast, roastId: '1'});
+                coffees.push({id: newId, name: newName, roast: newRoast, roastId: 1});
                 localStorage.setItem(newId, `${coffeeAdd.value},${roastAdd.value},1`)
                 break;
             case "medium":
-                coffees.push({id: newId, name: newName, roast: newRoast, roastId: '2'});
+                coffees.push({id: newId, name: newName, roast: newRoast, roastId: 2});
                 localStorage.setItem(newId, `${coffeeAdd.value},${roastAdd.value},2`)
                 break;
             case "dark":
-                coffees.push({id: newId, name: newName, roast: newRoast, roastId: '3'});
+                coffees.push({id: newId, name: newName, roast: newRoast, roastId: 3});
                 localStorage.setItem(newId, `${coffeeAdd.value},${roastAdd.value},3`)
                 break;
         }
@@ -86,18 +91,38 @@ function addCoffee(e) {
     updateCoffees();
 }
 function removeCoffee () {
-    let idArray = [];
-    let idToDelete = Number(this.id); //convert to number (typeof this.id = "string")
-    for(let i = 0; i < coffees.length; i++) {
-        idArray.push(coffees[i].id)
+    if(JSON.stringify(localStorage).includes(this.id)) {
+        localStorage.removeItem(this.id)
+        for(let i = 0; i < coffees.length; i++) {
+            if(coffees[i].id === Number(this.id)) {
+                coffees.splice(i, 1)
+            }
+        }
+        let backdrop = document.querySelector(".modal-backdrop");
+        backdrop.remove();
+        updateCoffees();
     }
-    let coffeeToDelete = idArray.indexOf(idToDelete); //indexOf only works numbers of type "number"
-    console.log(coffeeToDelete);
-    console.log(typeof coffeeToDelete);
-    coffees.splice(coffeeToDelete, 1);
-    let backdrop = document.querySelector(".modal-backdrop");
-    backdrop.remove();
-    updateCoffees();
+    else {
+        alert("You can only delete coffees you added.");
+        let backdrop = document.querySelector(".modal-backdrop");
+        backdrop.remove();
+    }
+    // let idArray = [];
+    // let idToDelete = Number(this.id); //convert to number (typeof this.id = "string")
+    //
+    // if(JSON.stringify(localStorage).includes(this.id)) { //remove coffee from local storage
+    //     localStorage.removeItem(this.id);
+    // }
+    //
+    // for(let i = 0; i < coffees.length; i++) {
+    //     idArray.push(coffees[i].id)
+    // }
+    // let coffeeToDelete = idArray.indexOf(idToDelete); //indexOf only works numbers of type "number"
+    // coffees.splice(coffeeToDelete, 1);
+    //
+    // let backdrop = document.querySelector(".modal-backdrop");
+    // backdrop.remove();
+    // updateCoffees();
 
 
 }
@@ -151,20 +176,20 @@ function removeCoffee () {
 
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
 var coffees = [
-    {id: 1, name: 'Light City', roast: 'light', roastId: '1'},
-    {id: 2, name: 'Half City', roast: 'light', roastId: '1'},
-    {id: 3, name: 'Cinnamon', roast: 'light', roastId: '1'},
-    {id: 4, name: 'City', roast: 'medium', roastId: '2'},
-    {id: 5, name: 'American', roast: 'medium', roastId: '2'},
-    {id: 6, name: 'Breakfast', roast: 'medium', roastId: '2'},
-    {id: 7, name: 'High', roast: 'dark', roastId: '3'},
-    {id: 8, name: 'Continental', roast: 'dark', roastId: '3'},
-    {id: 9, name: 'New Orleans', roast: 'dark', roastId: '3'},
-    {id: 10, name: 'European', roast: 'dark', roastId: '3'},
-    {id: 11, name: 'Espresso', roast: 'dark', roastId: '3'},
-    {id: 12, name: 'Viennese', roast: 'dark', roastId: '3'},
-    {id: 13, name: 'Italian', roast: 'dark', roastId: '3'},
-    {id: 14, name: 'French', roast: 'dark', roastId: '3'},
+    {id: 1, name: 'Light City', roast: 'light', roastId: 1},
+    {id: 2, name: 'Half City', roast: 'light', roastId: 1},
+    {id: 3, name: 'Cinnamon', roast: 'light', roastId: 1},
+    {id: 4, name: 'City', roast: 'medium', roastId: 2},
+    {id: 5, name: 'American', roast: 'medium', roastId: 2},
+    {id: 6, name: 'Breakfast', roast: 'medium', roastId: 2},
+    {id: 7, name: 'High', roast: 'dark', roastId: 3},
+    {id: 8, name: 'Continental', roast: 'dark', roastId: 3},
+    {id: 9, name: 'New Orleans', roast: 'dark', roastId: 3},
+    {id: 10, name: 'European', roast: 'dark', roastId: 3},
+    {id: 11, name: 'Espresso', roast: 'dark', roastId: 3},
+    {id: 12, name: 'Viennese', roast: 'dark', roastId: 3},
+    {id: 13, name: 'Italian', roast: 'dark', roastId: 3},
+    {id: 14, name: 'French', roast: 'dark', roastId: 3},
 ];
 
 function sortByNameAndThenRoast() {
@@ -174,8 +199,8 @@ function sortByNameAndThenRoast() {
 
 function appendFromLocalStorage() {
     for (let i = 0; i < localStorage.length; i++) {
-        let newId = coffees.length + 1;
-        coffees.push({id: newId, name: localStorage[newId].split(",")[0], roast: localStorage[newId].split(",")[1], roastId: localStorage[newId].split(",")[2]})
+        let storeId = Number(localStorage.key(i));
+        coffees.push({id: storeId, name: localStorage[storeId].split(",")[0], roast: localStorage[storeId].split(",")[1], roastId: localStorage[storeId].split(",")[2]})
     }
 }
 appendFromLocalStorage();

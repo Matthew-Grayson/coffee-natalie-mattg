@@ -67,10 +67,8 @@ function addCoffee(e) {
         alert("That coffee already exists.")
     }
     else {
-        while(JSON.stringify(localStorage).includes(newId)) { //prevents overwriting of existing ids
-            console.log(newId);
+        while(JSON.stringify(localStorage).includes(newId)) { //iterates overwriting of existing ids
             newId++;
-            console.log(newId);
         }
         switch(roastAdd.value) {
             case "light":

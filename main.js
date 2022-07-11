@@ -6,7 +6,7 @@ function renderCoffee(coffee) {
         <span>${coffee.name}</span>
         <p class="roastText">${coffee.roast}</p>
     </div>
-    <div class="modal fade" id="${coffee.name.toLowerCase().replace(/\W/g,"-")}-modal" tabIndex="-1" aria-hidden="true">
+    <div class="modal fade opacity-75" id="${coffee.name.toLowerCase().replace(/\W/g,"-")}-modal" tabIndex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -17,7 +17,7 @@ function renderCoffee(coffee) {
                     <p>Would you like to delete this coffee?</p>
                 </div>
                 <div class="modal-footer">
-                    <button id="${coffee.id}" type="button" class="btn btn-primary deleteButton">Delete</button>
+                    <button id="${coffee.id}" type="button" class="btn btn-secondary deleteButton">Delete</button>
                 </div>
             </div>
         </div>
